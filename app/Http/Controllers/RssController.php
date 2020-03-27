@@ -10,7 +10,7 @@ class RssController extends Controller
 {
     /**
      * Route /
-     * Gets the RSS feed
+     * Gets the exchange rate data for view
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
