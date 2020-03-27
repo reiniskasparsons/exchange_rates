@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +17,9 @@ class RssController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $rates = ExchangeRate::orderBy('id', 'DESC')->paginate(env('ITEMS_PER_PAGE', '20'));
+
+        return view('index', compact('rates'));
     }
 
 }
