@@ -22,4 +22,17 @@ class RssController extends Controller
         return view('index', compact('rates'));
     }
 
+
+    public function singleExchangeRate(Request $request, $id) {
+        $rate = ExchangeRate::where('id', $id)->first();
+        if($rate) {
+            $rate = $rate->toArray();
+            $relatedRates = ExchangeRate::findRelatedRates($rate);
+            return view('single', compact('relatedRates'));
+        } else {
+            return \redirect('/')->withErrors(['error' => 'No exchange rate with that ID found']);
+        }
+
+    }
+
 }
