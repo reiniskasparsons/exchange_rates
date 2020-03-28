@@ -15,3 +15,8 @@
  * Route for RSS feed
  */
 Route::get('/', 'RssController@index');
+
+/**
+ * Route for single exchange rate
+ */
+Route::get('/single/{id}', 'RssController@singleExchangeRate')->where('id', '[0-9]+');

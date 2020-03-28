@@ -1,0 +1,43 @@
+.pagination {
+    display: flex;
+    padding-left: 0px;
+    list-style: none;
+    border-radius: 0.25rem;
+    justify-content: center;
+}
+.centered_data {
+    display: flex;
+    justify-content: center;
+}
+.mright-40px {
+    margin-right:40px;
+}
+.table {
+    width:42%;
+    margin: auto;
+}
+.cursor-pointer{
+    cursor: pointer;
+}
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+.hidden {
+    display:none;
+}
+.table tbody tr:hover {
+    background-color: rgba(3, 3, 3, 0.25) !important;
+}
+.margin-auto{
+    margin:auto;
+}

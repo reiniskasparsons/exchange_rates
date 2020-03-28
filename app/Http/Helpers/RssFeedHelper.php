@@ -44,7 +44,7 @@ class RssFeedHelper
                         $item['desc'][$explodedData[0]] = $explodedData[1];
                     }
                     // Change date format to mysql
-                    $item['date'] = date('Y-m-d H:i:s', strtotime($item['date']));
+                    $item['date'] = date('Y-m-d', strtotime($item['date']));
                 }
                  return (((new self())->saveExchangeRates($arrayOfItems)) == true) ? true : false;
             }

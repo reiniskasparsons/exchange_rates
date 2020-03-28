@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +17,30 @@ class RssController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $rates = ExchangeRate::orderBy('id', 'DESC')->paginate(env('ITEMS_PER_PAGE', '20'));
+
+        return view('index', compact('rates'));
+    }
+
+
+    /**
+     * Route /single/{id}
+     * Returns the data for previous day exchange rate from the exchange rate selected
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
+    public function singleExchangeRate(Request $request, $id) {
+        $rate = ExchangeRate::where('id', $id)->first();
+        if($rate) {
+            $rate = $rate->toArray();
+            $relatedRates = ExchangeRate::findRelatedRates($rate);
+            return view('single', compact('relatedRates'));
+        } else {
+            return \redirect('/')->withErrors(['error' => 'No exchange rate with that ID found']);
+        }
+
     }
 
 }
