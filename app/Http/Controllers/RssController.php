@@ -23,6 +23,14 @@ class RssController extends Controller
     }
 
 
+    /**
+     * Route /single/{id}
+     * Returns the data for previous day exchange rate from the exchange rate selected
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function singleExchangeRate(Request $request, $id) {
         $rate = ExchangeRate::where('id', $id)->first();
         if($rate) {
