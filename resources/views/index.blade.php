@@ -10,28 +10,16 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/app.css">
-    <!-- Styles -->
-    <style>
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-    </style>
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
 <div class="flex-center position-ref full-height">
     <div class="container">
+        @if($errors->any())
+            <div class="alert alert-danger w-50 margin-auto" role="alert">
+                {{$errors->first()}}
+            </div>
+        @endif
         <table class="table table-sm table-striped">
             <thead>
             <tr>
@@ -42,17 +30,18 @@
             </tr>
             </thead>
             <tbody>
-            @foreach ($rates as $rate)
-                <tr>
-                    <th scope="row">{{$rate->id}}</th>
-                    <td>{{$rate->currency}}</td>
-                    <td>{{$rate->rate}}</td>
-                    <td>{{$rate->date}}</td>
-                </tr>
-            @endforeach
+            @if(!empty($rates))
+                @foreach ($rates as $rate)
+                    <tr class="cursor-pointer" onclick="window.location='/single/{{$rate->id}}';">
+                        <th scope="row">{{$rate->id}}</th>
+                        <td>{{$rate->currency}}</td>
+                        <td>{{$rate->rate}}</td>
+                        <td>{{$rate->date}}</td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
-
         {{$rates->links("pagination::bootstrap-4")}}
     </div>
 </div>
